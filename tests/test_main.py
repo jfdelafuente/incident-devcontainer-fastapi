@@ -16,57 +16,16 @@ def test_get_aplicacion(client):
     assert response.status_code == 200
     assert response.json()["nombre"] == "pangea"
 
-def test_create_aplicacion(client):
-    new_aplicacion = {
-        "id": str(uuid4()),
-        "nombre": "new_app",
-        "descripcion": "new_description",
-        "url": "new_app@correo.com",
-        "marca": "new_marca",
-        "dominio": "new_dominio",
-        "responsable": "new_responsable",
-        "first_nivel": [],
-        "second_nivel": [],
-        "tercer_nivel": [],
-        "coordinador": [],
-        "horario_servicio": "24x7",
-        "horario_atencion": "24x7",
-        "ventana_intervencion": "24x7",
-        "ventana_intervencion_semanal": "24x7",
-        "ventana_intervencion_mensual": "24x7",
-        "observaciones": "new_observaciones",
-        "centro_afectado": "new_centro_afectado",
-        "impacto_negocio": "new_impacto_negocio"
-    }
-    response = client.post("/aplicacion/", json=new_aplicacion)
+def test_create_aplicacion(client, app_payload):
+    response = client.post("/aplicacion/", json=app_payload)
     assert response.status_code == 200
     assert response.json()["nombre"] == "new_app"
 
-def test_update_aplicacion(client):
-    updated_aplicacion = {
-        "id": str(uuid4()),
-        "nombre": "pangea",
-        "descripcion": "updated_description",
-        "url": "updated@correo.com",
-        "marca": "updated_marca",
-        "dominio": "updated_dominio",
-        "responsable": "updated_responsable",
-        "first_nivel": [],
-        "second_nivel": [],
-        "tercer_nivel": [],
-        "coordinador": [],
-        "horario_servicio": "24x7",
-        "horario_atencion": "24x7",
-        "ventana_intervencion": "24x7",
-        "ventana_intervencion_semanal": "24x7",
-        "ventana_intervencion_mensual": "24x7",
-        "observaciones": "updated_observaciones",
-        "centro_afectado": "updated_centro_afectado",
-        "impacto_negocio": "updated_impacto_negocio"
-    }
-    response = client.put("/aplicacion/pangea", json=updated_aplicacion)
+def test_update_aplicacion(client, app_payload_update):
+    response = client.put("/aplicacion/pangea", json=app_payload_update)
     assert response.status_code == 200
     assert response.json()["descripcion"] == "updated_description"
+    assert response.json()["nombre"] == "pangea"
 
 def test_delete_aplicacion(client):
     response = client.delete("/aplicacion/pangea")
