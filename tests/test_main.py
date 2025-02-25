@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from api.main import app
+# from api.main import app
 from uuid import uuid4
 
 # filepath: test_main.py
@@ -42,7 +42,7 @@ def test_create_aplicacion(client):
     assert response.status_code == 200
     assert response.json()["nombre"] == "new_app"
 
-def test_update_soporte(client):
+def test_update_aplicacion(client):
     updated_aplicacion = {
         "id": str(uuid4()),
         "nombre": "pangea",
@@ -68,7 +68,7 @@ def test_update_soporte(client):
     assert response.status_code == 200
     assert response.json()["descripcion"] == "updated_description"
 
-def test_delete_book(client):
-    response = client.delete("/soporte/pangea")
+def test_delete_aplicacion(client):
+    response = client.delete("/aplicacion/pangea")
     assert response.status_code == 200
     assert response.json()["message"] == "Aplicacion deleted successfully"
