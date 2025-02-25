@@ -1,0 +1,10 @@
+.devcontainer/*.env
+.devcontainer/env-vars*
+
+__pycache__
+__pycache__/*
+.pytest_cache
+.pytest_cache/*
+
+.coverage
+coverage.xml
